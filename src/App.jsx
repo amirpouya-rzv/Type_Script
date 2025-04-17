@@ -1,16 +1,27 @@
-import { useState } from "react"
+import { useEffect } from "react"
 import Content from "./Layout/content/Content"
 import Header from "./Layout/header/Header"
 import SideBar from "./Layout/sidebar/SideBar"
+import { useAppSelector } from "./redux/ui_management/reduxHook"
 
 function App() {
-  const [showSideBar, setShowSideBar] = useState(false)
+  const { them } = useAppSelector(state => state.uiManagerReducer)
+
+  useEffect(() => {
+    const root = document.documentElement
+    if (them === "dark") {
+      root.classList.add("dark")
+    } else {
+      root.classList.remove("dark")
+    }
+  }, [them])
+
   return (
- <>
-  <Content/>
-  <Header setShowSideBar={()=>{setShowSideBar(!showSideBar)}}/>
-  <SideBar showSideBar={showSideBar} setHiddenSideBar={()=>setShowSideBar(false)}/>
- </>
+    <main>
+      <Content />
+      <Header />
+      <SideBar />
+    </main>
   )
 }
 
