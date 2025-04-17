@@ -21,7 +21,7 @@ const DarkModeButtns = () => {
                        </button>
        
                    <button
-                   className='block md:hidden mt-5 mr-4 transition-all transform hover:scale-110'
+                   className='block md:hidden mt-5  mr-4 transition-all transform hover:scale-110'
                     onClick={() => { dispatch(setShowSidebar(false)) }}>
                    </button>
                {/* items */}

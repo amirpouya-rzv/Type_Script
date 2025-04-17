@@ -8,8 +8,8 @@ const Header = () => {
     const dispatch = useDispatch();
 
     return (
- <section id="header" className="fixed top-0 h-app_header_h w-full shadow-lg bg-white 
- dark:bg-[#25232c] dark:text-white md:pr-app_sidebar_w border-b ">
+ <section id="header" className="fixed top-0 h-app_header_h w-full shadow-lg bg-slate-200 
+ dark:bg-[#25232c] dark:text-white md:pr-app_sidebar_w border-b dark:border-rose-600">
     <button className='md:hidden mt-4 mx-2'  onClick={()=>dispatch(setShowSidebar(true))}>
     <CgMenuHotdog  size={24}/>
     </button>

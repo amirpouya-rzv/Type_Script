@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { getCategoriesServices } from '../../services/CategoriesServiceis';
 import { taskCategoriesListType } from '../../types/taskCategories';
+import { converMiladi2Jalali } from '../../utils/dateutils';
+import { CiTrash } from 'react-icons/ci';
+import { FaRegEdit } from 'react-icons/fa';
 
 const Categories = () => {
   const [categories, setCategories] = useState<taskCategoriesListType[]>([])
@@ -39,10 +42,12 @@ const Categories = () => {
                 <td className="   hidden md:block">{value.id}</td>
                 <td>{value.title}</td>
                 <td className="   hidden md:block">{value.description}</td>
-                <td>{value.createdAt}</td>
+                <td>{converMiladi2Jalali(value.createdAt,'jD jMMMM jYYYY')}</td>
                 <td>
-                  <button className="text-blue-400 hover:underline mx-1">ویرایش</button>
-                  <button className="text-red-400 hover:underline mx-1">حذف</button>
+                  <button className="text-blue-400 hover:underline mx-1"><FaRegEdit />
+                  </button>
+                  <button className="text-red-400 hover:underline mx-1"><CiTrash />
+                  </button>
                 </td>
               </tr>
             ))}

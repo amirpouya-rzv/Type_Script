@@ -14,7 +14,7 @@ const SideBarItem = ({Icon,title, to}: SidebarItemType) => {
         <li>
             <NavLink to={to} 
             className={({isActive})=>`items-center rounded-full px-3 py-2 transition-all hover:bg-gray-800
-            hover:text-white border-l-2 border-l-red-500 border-r-2 border-r-red-500 flex space-y-4 gap-5 mx-2 mt-5
+            hover:text-white border-l-2 border-l-rose-600 border-r-2 border-r-red-600 flex space-y-4 gap-5 mx-2 mt-5
                  ${isActive && "bg-gray-500 text-white"}`}>
                 <Icon size={20}/>
                 {title}
