@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { getCategoriesServices } from '../../services/CategoriesServiceis';
 import { taskCategoriesListType } from '../../types/taskCategories';
-import { converMiladi2Jalali } from '../../utils/dateutils';
+import { converMiladi2Jalali } from '../../utils/dateUtils';
 import { CiTrash } from 'react-icons/ci';
 import { FaRegEdit } from 'react-icons/fa';
+import { successToast } from '../../utils/toastutils';
 
 const Categories = () => {
   const [categories, setCategories] = useState<taskCategoriesListType[]>([])
@@ -11,7 +12,7 @@ const Categories = () => {
   const handleGetCategories = async () => {
     const data = await getCategoriesServices();
     setCategories(data);
-    console.log('دریافت شده:', data);
+    successToast()
   }
 
   useEffect(() => {
@@ -37,7 +38,7 @@ const Categories = () => {
             {categories.map((value) => (
               <tr
                 key={value.id}
-                className="[&>td]:px-4 [&>td]:py-3 [&>td]:text-center text-center border-b border-stone-700  dark:hover:bg-stone-900 transition-colors duration-200"
+                className="[&>td]:px-4 [&>td]:py-3 [&>td]:text-center text-center border-b border-stone-700  dark:hover:bg-stone-900 hover:bg-slate-500 transition-colors duration-200 "
               >
                 <td className="   hidden md:block">{value.id}</td>
                 <td>{value.title}</td>

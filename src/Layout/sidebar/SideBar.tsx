@@ -16,7 +16,7 @@ const SideBar = () => {
         <section id="sidebar"
             className={`fixed md:right-0 top-0 h-screen w-app_sidebar_w
                dark:bg-[#1b191f] dark:text-white  text-black md:block border-l bg-slate-300
-                border-rose-600 transition-all ${showsidebar ? "right-0" : " -right-app_sidebar_w"}`}>
+                border-rose-600 dark:shadow-rose-800 shadow-2xl transition-all ${showsidebar ? "right-0" : " -right-app_sidebar_w"}`}>
             <div className='flex justify-between md:justify-end md:-mt-5 md:mx-2 items-center  '>
 
                 <DarkModeButtns />

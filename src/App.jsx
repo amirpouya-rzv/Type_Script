@@ -3,6 +3,7 @@ import Content from "./Layout/content/Content"
 import Header from "./Layout/header/Header"
 import SideBar from "./Layout/sidebar/SideBar"
 import { useAppSelector } from "./redux/ui_management/reduxHook"
+import { ToastContainer } from "react-toastify"
 
 function App() {
   const { them } = useAppSelector(state => state.uiManagerReducer)
@@ -21,6 +22,8 @@ function App() {
       <Content />
       <Header />
       <SideBar />
+      <ToastContainer />
+
     </main>
   )
 }

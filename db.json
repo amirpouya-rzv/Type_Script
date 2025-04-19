@@ -1,0 +1,49 @@
+{
+    "users": [
+        {
+            "id": "1",
+            "phone": "1234567890",
+            "password": "password123",
+            "email": "example@example.com",
+            "firstName": "John",
+            "lastName": "Doe",
+            "role": "user",
+            "gender": 1,
+            "createdAt": "2024-01-01T00:00:00.000Z"
+        }
+    ],
+    "taskCategories": [
+        {
+            "id": "1",
+            "title": "Work",
+            "description": "Work-related tasks",
+            "icon": "work_icon",
+            "userId": "1",
+            "createdAt": "2024-01-01T00:00:00.000Z"
+        },
+        {
+            "id": "2",
+            "title": "Personal",
+            "description": "Personal tasks",
+            "icon": "personal_icon",
+            "userId": "2",
+            "createdAt": "2025-05-05T00:13:08.111Z"
+        }
+    ],
+    "tasks": [
+        {
+            "id": "1",
+            "groupCode": "group1",
+            "title": "Task 1",
+            "description": "This is task 1",
+            "isDone": false,
+            "taskCategoryId": "1",
+            "repetitionType": 0,
+            "repetitionItems": 1,
+            "includeVacation": true,
+            "startedAt": null,
+            "endedAt": null,
+            "createdAt": "2024-01-01T00:00:00.000Z"
+        }
+    ]
+}
