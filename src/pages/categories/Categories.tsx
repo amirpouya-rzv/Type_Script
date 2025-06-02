@@ -1,26 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getCategoriesServices } from '../../services/CategoriesServiceis';
-import { taskCategoriesListType } from '../../types/taskCategories';
-import { converMiladi2Jalali } from '../../utils/dateUtils';
+import { AddCategoriesType } from '../../types/taskCategories';
 import { CiTrash } from 'react-icons/ci';
 import { FaRegEdit } from 'react-icons/fa';
-import { successToast } from '../../utils/toastutils';
+import Dialog from './_partials/Dialog';
+import { converMiladi2Jalali } from '@/utils/dateutils';
 
 const Categories = () => {
-  const [categories, setCategories] = useState<taskCategoriesListType[]>([])
+  const [categories, setCategories] = useState<AddCategoriesType[]>([])
+    const [flag, setFlag] = useState(false);
 
   const handleGetCategories = async () => {
     const data = await getCategoriesServices();
     setCategories(data);
-    successToast()
   }
 
   useEffect(() => {
     handleGetCategories()
-  }, [])
+    setFlag(!flag);
+  }, [flag])
+
+
+
 
   return (
     <div className="p-4">
+      <div className='flex justify-end'>
+        <button type="button" >
+          <Dialog />
+        </button>
+
+      </div>
       <div className="overflow-x-hidden rounded-xl shadow-lg">
         <table className="w-full table-auto text-sm dark:text-white hover:bg-slate-300 bg-slate-200 text-black dark:bg-stone-800 rounded-xl overflow-hidden">
 
@@ -43,7 +53,7 @@ const Categories = () => {
                 <td className="   hidden md:block">{value.id}</td>
                 <td>{value.title}</td>
                 <td className="   hidden md:block">{value.description}</td>
-                <td>{converMiladi2Jalali(value.createdAt,'jD jMMMM jYYYY')}</td>
+                <td>{converMiladi2Jalali(value.createdAt, 'jD jMMMM jYYYY')}</td>
                 <td>
                   <button className="text-blue-400 hover:underline mx-1"><FaRegEdit />
                   </button>

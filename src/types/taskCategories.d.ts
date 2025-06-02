@@ -1,9 +1,14 @@
-export type taskCategoriesListType = {
-      "id": "1",
-      "title": "Work",
-      "description": "Work-related tasks",
-      "icon": "work_icon",
-      "userId": "1",
-      "createdAt": "2024-01-01T00:00:00.000Z"
-    }
-  
+export interface AddCategoriesType {
+  id?: string;
+  title: string;
+  description: string;
+  icon?: string;
+  userId: string;
+  createdAt: string;
+}
+
+export interface CategoriesItemType extends AddCategoriesType {
+  id: string;
+  icon: string;
+
+}

@@ -4,6 +4,9 @@ import Header from "./Layout/header/Header"
 import SideBar from "./Layout/sidebar/SideBar"
 import { useAppSelector } from "./redux/ui_management/reduxHook"
 import { ToastContainer } from "react-toastify"
+import 'primereact/resources/themes/lara-light-indigo/theme.css';  // تم PrimeReact
+import 'primereact/resources/primereact.min.css';                   // استایل‌های کامپوننت‌ها
+import 'primeicons/primeicons.css';                                 // آیکون‌های PrimeIcons
 
 function App() {
   const { them } = useAppSelector(state => state.uiManagerReducer)
@@ -22,8 +25,7 @@ function App() {
       <Content />
       <Header />
       <SideBar />
-      <ToastContainer />
-
+      <ToastContainer stacked/>
     </main>
   )
 }

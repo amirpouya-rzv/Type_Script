@@ -1,9 +1,8 @@
-import React from 'react';
-
+import Dialog from "../categories/_partials/Dialog";
 const DasBord = () => {
     return (
         <div>
-            dashboard
+            <Dialog />
         </div>
     );
 };
