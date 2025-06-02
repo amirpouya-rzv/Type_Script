@@ -23,6 +23,12 @@ export default function FooterDemo() {
         if (res.status = 200) {
             setCategories([...categories, res.data]);
             setVisible(false); // بستن دیالوگ بعد از موفقیت
+            setValues({ // ریست کردن فرم
+            title: "",
+            description: "",
+            createdAt: new Date().toDateString(),
+            userId: "1",
+        });
         }
     }
 
