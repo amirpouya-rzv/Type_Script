@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import DashBord from '../../pages/dashboard/DashBord';
 import Categories from '../../pages/categories/Categories';
-import Task from '../../pages/task/Task';
+import Task from '../../pages/tasks/Task';
 
 const Content = () => {
     return (
