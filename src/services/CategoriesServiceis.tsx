@@ -21,3 +21,7 @@ export const addCategoriesServices =  (values : AddCategoriesType) => {
 }
 
 
+export const deleteCategoriesServices =  (catId : string) => {
+    return httpService(`/taskCategories/${catId}`, "DELETE")  
+  
+}

@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
-import { getCategoriesServices } from '../../services/CategoriesServiceis';
+import { deleteCategoriesServices, getCategoriesServices } from '../../services/CategoriesServiceis';
 import { AddCategoriesType } from '../../types/taskCategories';
 import { CiTrash } from 'react-icons/ci';
 import { FaRegEdit } from 'react-icons/fa';
 import Dialog from './_partials/Dialog';
 import { converMiladi2Jalali } from '@/utils/dateutils';
+import { confirmAlert } from '@/utils/alertUtiles';
+import { successToast } from '@/utils/toastUtils';
 
 const Categories = () => {
   const [categories, setCategories] = useState<AddCategoriesType[]>([])
-    const [flag, setFlag] = useState(false);
+  const [flag, setFlag] = useState(false);
 
   const handleGetCategories = async () => {
     const data = await getCategoriesServices();
@@ -17,9 +19,22 @@ const Categories = () => {
 
   useEffect(() => {
     handleGetCategories()
-    setFlag(!flag);
-  }, [flag])
+  }, [])
 
+
+  const handelDeleteItem = async (value: AddCategoriesType) => {
+    const confirm = await confirmAlert("آیا مطمئن هستید؟")
+    if (confirm .isConfirmed) {
+      const res = await deleteCategoriesServices(value.id)
+      if (res.status === 200) {
+        const newcategories = categories.filter((p) => p.id !== value.id)
+        setCategories(newcategories)
+        successToast()
+      }
+
+    }
+
+  }
 
 
 
@@ -57,7 +72,7 @@ const Categories = () => {
                 <td>
                   <button className="text-blue-400 hover:underline mx-1"><FaRegEdit />
                   </button>
-                  <button className="text-red-400 hover:underline mx-1"><CiTrash />
+                  <button className="text-red-400 hover:underline mx-1" onClick={() => handelDeleteItem(value)}><CiTrash />
                   </button>
                 </td>
               </tr>

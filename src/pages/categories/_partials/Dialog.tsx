@@ -8,27 +8,25 @@ import { Dialog } from 'primereact/dialog';
 import { useState } from 'react';
 
 export default function FooterDemo() {
-    const [visible, setVisible] = useState(false);
-    const [categories, setCategories] = useState<AddCategoriesType[]>([])
-    const [values, setValues] = useState<AddCategoriesType>({
+
+    const initialvalues = {
         title: "",
         description: "",
         createdAt: new Date().toDateString(),
         userId: "1",
-    })
+    }
+
+    const [open, setOpen] = useState(false);
+    // const [categories, setCategories] = useState<AddCategoriesType[]>([])
+    const [values, setValues] = useState<AddCategoriesType>(initialvalues)
 
     const handleaddcategoris = async () => {
         const res = await addCategoriesServices(values);
-        successToast();
-        if (res.status = 200) {
-            setCategories([...categories, res.data]);
-            setVisible(false); // بستن دیالوگ بعد از موفقیت
-            setValues({ // ریست کردن فرم
-            title: "",
-            description: "",
-            createdAt: new Date().toDateString(),
-            userId: "1",
-        });
+        if (res.status === 201) {
+            successToast();
+            setValues(res.data);
+            setOpen(false);
+            setValues(initialvalues)
         }
     }
 
@@ -37,13 +35,13 @@ export default function FooterDemo() {
             <Button
                 className="bg-indigo-700 hover:bg-indigo-800 rounded-full text-white py-1 pb-2 shadow-2xl px-5 flex justify-center items-center mb-5"
                 label="+"
-                onClick={() => setVisible(true)}
+                onClick={() => setOpen(true)}
             />
             <Dialog
                 header="افزودن دسته‌بندی"
-                visible={visible}
+                visible={open}
                 className='w-11/12 md:w-6/12 lg:w-4/12'
-                onHide={() => setVisible(false)}
+                onHide={() => setOpen(false)}
             >
                 <form
                     onSubmit={(e) => {

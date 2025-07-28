@@ -1,5 +1,5 @@
 import Dialog from "../categories/_partials/Dialog";
-const DasBord = () => {
+const DashBord = () => {
     return (
         <div>
             <Dialog />
@@ -7,4 +7,4 @@ const DasBord = () => {
     );
 };
 
-export default DasBord;
+export default DashBord;
