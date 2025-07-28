@@ -10,7 +10,8 @@ import { successToast } from '@/utils/toastUtils';
 
 const Categories = () => {
   const [categories, setCategories] = useState<AddCategoriesType[]>([])
-  const [flag, setFlag] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<AddCategoriesType>()
 
   const handleGetCategories = async () => {
     const data = await getCategoriesServices();
@@ -24,7 +25,7 @@ const Categories = () => {
 
   const handelDeleteItem = async (value: AddCategoriesType) => {
     const confirm = await confirmAlert("آیا مطمئن هستید؟")
-    if (confirm .isConfirmed) {
+    if (confirm.isConfirmed) {
       const res = await deleteCategoriesServices(value.id)
       if (res.status === 200) {
         const newcategories = categories.filter((p) => p.id !== value.id)
@@ -42,7 +43,11 @@ const Categories = () => {
     <div className="p-4">
       <div className='flex justify-end'>
         <button type="button" >
-          <Dialog />
+          <Dialog
+            open={open}
+            setOpen={setOpen}
+            selectedItem={selectedItem}
+            setSelectedItem={setSelectedItem} />
         </button>
 
       </div>
@@ -70,7 +75,12 @@ const Categories = () => {
                 <td className="   hidden md:block">{value.description}</td>
                 <td>{converMiladi2Jalali(value.createdAt, 'jD jMMMM jYYYY')}</td>
                 <td>
-                  <button className="text-blue-400 hover:underline mx-1"><FaRegEdit />
+                  <button className="text-blue-400 hover:underline mx-1"
+                    onClick={() => {
+                      setOpen(true)
+                      setSelectedItem(value)
+                    }}
+                  ><FaRegEdit />
                   </button>
                   <button className="text-red-400 hover:underline mx-1" onClick={() => handelDeleteItem(value)}><CiTrash />
                   </button>

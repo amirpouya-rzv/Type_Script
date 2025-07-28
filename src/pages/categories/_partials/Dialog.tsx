@@ -1,44 +1,73 @@
 import AppButton from '@/components/shared/AppButton';
 import AppInput from '@/components/shared/AppInput';
-import { addCategoriesServices } from '@/services/CategoriesServiceis';
+import { addCategoriesServices, updateCategoriesServices } from '@/services/CategoriesServiceis';
 import { AddCategoriesType } from '@/types/taskCategories';
 import { successToast } from '../../../utils/toastUtils';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import Categories from '../Categories';
 
-export default function FooterDemo() {
 
-    const initialvalues = {
-        title: "",
-        description: "",
-        createdAt: new Date().toDateString(),
-        userId: "1",
-    }
+const initialvalues = {
+    title: "",
+    description: "",
+    createdAt: new Date().toDateString(),
+    userId: "1",
+}
 
-    const [open, setOpen] = useState(false);
-    // const [categories, setCategories] = useState<AddCategoriesType[]>([])
+type ModalDilogType = {
+    open: boolean,
+    setOpen: (value: boolean) => void
+    selectedItem?: AddCategoriesType
+    setSelectedItem: Dispatch<SetStateAction<AddCategoriesType | undefined>>
+}
+
+export default function FooterDemo(
+    { open,
+        setOpen,
+        selectedItem,
+        setSelectedItem
+    }:
+        ModalDilogType) {
+
+
     const [values, setValues] = useState<AddCategoriesType>(initialvalues)
 
     const handleaddcategoris = async () => {
-        const res = await addCategoriesServices(values);
-        if (res.status === 201) {
-            successToast();
-            setValues(res.data);
-            setOpen(false);
-            setValues(initialvalues)
+        let res;
+        if (selectedItem) {
+            res = await updateCategoriesServices(selectedItem.id, values);
+        } else {
+            res = await addCategoriesServices(values);
         }
-    }
+
+        if (res?.status === 200 || res?.status === 201) {
+            successToast(selectedItem ? "دسته‌بندی با موفقیت ویرایش شد" : "دسته‌بندی با موفقیت اضافه شد");
+            setOpen(false);
+            setSelectedItem(undefined);
+            setValues(initialvalues);
+        }
+    };
+
+
+
+    useEffect(() => {
+        setValues(selectedItem || initialvalues)
+    }, [selectedItem])
 
     return (
         <div className="card flex justify-content-center">
             <Button
                 className="bg-indigo-700 hover:bg-indigo-800 rounded-full text-white py-1 pb-2 shadow-2xl px-5 flex justify-center items-center mb-5"
                 label="+"
-                onClick={() => setOpen(true)}
+                onClick={() => {
+                    setOpen(true)
+                    setSelectedItem(undefined)
+                }}
             />
             <Dialog
-                header="افزودن دسته‌بندی"
+                header={selectedItem ? "ویرایش دسته‌بندی" : "افزودن دسته‌بندی"}
                 visible={open}
                 className='w-11/12 md:w-6/12 lg:w-4/12'
                 onHide={() => setOpen(false)}
@@ -66,7 +95,7 @@ export default function FooterDemo() {
                     />
 
                     <div className="flex justify-center gap-2 mt-5">
-                        <AppButton type="submit" title="ثبت دسته‌بندی" />
+                        <AppButton type="submit" title="ثبت" />
                     </div>
                 </form>
             </Dialog>
