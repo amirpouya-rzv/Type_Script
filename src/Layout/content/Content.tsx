@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import DashBord from '../../pages/dashboard/DashBord';
-import Categories from '../../pages/categories/Categories';
 import Task from '../../pages/tasks/Task';
+import Users from '@/pages/categories/users';
 
 const Content = () => {
     return (
@@ -11,7 +11,7 @@ const Content = () => {
                 <div className='w-full p-4'>
                     <Routes>
                         <Route path='/' element={<DashBord />} />
-                        <Route path='/categoris' element={<Categories />} />
+                        <Route path='/users' element={<Users />} />
                         <Route path='/task' element={<Task />} />
                     </Routes>
                 </div>

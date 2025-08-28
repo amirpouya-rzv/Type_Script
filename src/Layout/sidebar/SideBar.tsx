@@ -33,7 +33,7 @@ const SideBar = () => {
                 <ul>
                     <SideBarItem to={"/"} Icon={FaHome} title='Dasbord' />
                     <SideBarItem to={"/task"} Icon={FaTasks} title='Task' />
-                    <SideBarItem to={"/categoris"} Icon={TbCategory} title='Categoreis' />
+                    <SideBarItem to={"/users"} Icon={TbCategory} title='users' />
 
                 </ul>
             </div>
