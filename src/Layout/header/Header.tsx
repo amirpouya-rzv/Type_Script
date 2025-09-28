@@ -18,14 +18,15 @@ const Header = () => {
                 <button className='md:hidden mt-4 mx-2' onClick={() => dispatch(setShowSidebar(true))}>
                     <CgMenuHotdog size={24} />
                 </button>
-                <p className='h idden md:block'>{converMiladi2Jalali(undefined, "ddd. jD jMMMM jYYYY")}</p>
+                <p className='hidden md:block'>{converMiladi2Jalali(undefined, "ddd. jD jMMMM jYYYY")}</p>
                 <span className='flex gap-2 justify-end items-center '>
-                    <button><GoBell size={24} className='text-yellow-500'/>
-                        <RxDot className='absolute top-4 text-rose-600 animate-ping' />
+                    <button><GoBell size={24} className='text-yellow-500' />
+                        <RxDot className='absolute top-5 text-rose-600 animate-ping' />
                     </button>
-                    <button className='border-2 text-sky-500 rounded-full p-1 border-gray-300'><IoPersonOutline size={24} />
+                    <button className='border-2 text-sky-500 rounded-full p-1 border-gray-300'>
+                        <img src="/picture/مرد با عینک.png" alt="profile" className='w-8 h-8 rounded-full' />
                     </button>
-                    <p>نام کاربر</p>
+                    <p>Amir Pouya</p>
                 </span>
             </div>
 

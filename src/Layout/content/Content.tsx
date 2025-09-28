@@ -13,6 +13,9 @@ const Content = () => {
                         <Route path='/' element={<DashBord />} />
                         <Route path='/users' element={<Users />} />
                         <Route path='/task' element={<Task />} />
+                        <Route path='/users/addusers'>
+                        <Route path=':editusers'/>
+                        </Route>
                     </Routes>
                 </div>
             </section>

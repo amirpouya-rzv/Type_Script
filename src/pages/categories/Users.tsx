@@ -1,11 +1,12 @@
 import ConfirmModal from "@/components/shared/ConfirmModal";
+import SearchInput from "@/components/shared/SearchInput";
 import { deleteUsersServices, getUsersServices } from "@/services/UsersServices";
 import { AddUserType } from "@/types/UsersType";
 import { successToast } from "@/utils/toastUtils";
 import { useEffect, useState } from "react";
 import { BiTrash } from "react-icons/bi";
 import { FaEdit, FaRegTrashAlt } from "react-icons/fa";
-
+import { Link } from "react-router-dom";
 const Users = () => {
   // state for data
   const [data, setData] = useState<AddUserType[]>([]);
@@ -44,6 +45,12 @@ const Users = () => {
 
   return (
     <div className="p-4">
+     <div className="flex justify-between">
+       <SearchInput/>
+      <Link to={'/users/addusers'}>
+        <button >add user </button>
+      </Link>
+     </div>
       <div className="overflow-x-hidden rounded-xl shadow-lg">
         <table className="w-full table-auto text-sm dark:text-white hover:bg-slate-300 bg-slate-200 text-black dark:bg-stone-800 rounded-xl overflow-hidden">
           <thead className="dark:bg-stone-700 bg-slate-400 dark:text-white">
@@ -97,9 +104,8 @@ const Users = () => {
         onCancel={() => setShowModal(false)}
         onConfirm={handleConfirmDelete}
         title="Delete User"
-        message={`?Are you sure you want to delete ${
-          selectedUser?.name || "this user"
-        }`}
+        message={`?Are you sure you want to delete ${selectedUser?.name || "this user"
+          }`}
       />
     </div>
   );
