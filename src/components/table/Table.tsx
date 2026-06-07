@@ -67,7 +67,7 @@ const Table = ({ data, datainfo, activityField }: TableProps) => {
   }, [search, sortField, sortDir, pageSize]);
 
   return (
-    <div className="backdrop-blur-sm rounded-2xl border-2 border-black/30 dark:bg-black/30 shadow-2xl overflow-hidden">
+    <div className="backdrop-blur-sm rounded-2xl border-2 border-black/30 shadow-2xl overflow-hidden">
       {/* HEADER */}
       <div className="flex items-center justify-between px-5 py-3 border-b">
         <div className="text-sm font-semibold text-white ">جدول داده‌ها</div>
