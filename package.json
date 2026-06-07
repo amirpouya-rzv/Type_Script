@@ -11,20 +11,32 @@
     "run-server": "json-server --watch db.json --port 4000"
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
+    "@fontsource-variable/geist": "^5.2.9",
     "@reduxjs/toolkit": "^2.6.1",
+    "@tanstack/react-virtual": "^3.14.2",
     "axios": "^1.8.4",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "framer-motion": "^12.23.12",
     "jalali-moment": "^3.3.11",
     "json-server": "^1.0.0-beta.3",
+    "lucide-react": "^1.17.0",
     "primeicons": "^7.0.0",
     "primereact": "^10.9.4",
+    "radix-ui": "^1.5.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.5.1",
     "react-toastify": "^11.0.5",
-    "sweetalert2": "^11.22.2"
+    "shadcn": "^4.10.0",
+    "sweetalert2": "^11.22.2",
+    "tailwind-merge": "^3.6.0",
+    "tw-animate-css": "^1.4.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",

@@ -1,0 +1,112 @@
+"use client";
+
+import React, { useMemo, useState, useEffect } from "react";
+import { TableProps } from "@/types/TableTypes";
+
+import TableSearch from "./TableSearch";
+import TableHeader from "./TableHeader";
+import TableBody from "./TableBody";
+import TablePagination from "./Pagination";
+
+const Table = ({ data, datainfo, activityField }: TableProps) => {
+  const [sortField, setSortField] = useState<string | null>(null);
+  const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
+  const [search, setSearch] = useState("");
+
+  // ✅ pagination state (FIXED)
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+
+  const handleSort = (field: string) => {
+    if (sortField === field) {
+      setSortDir((d) => (d === "asc" ? "desc" : "asc"));
+    } else {
+      setSortField(field);
+      setSortDir("asc");
+    }
+  };
+
+  // ✅ filter + sort
+  const filteredData = useMemo(() => {
+    return data
+      .filter((row) =>
+        datainfo.some((col) =>
+          String(row[col.field] ?? "")
+            .toLowerCase()
+            .includes(search.toLowerCase()),
+        ),
+      )
+      .sort((a, b) => {
+        if (!sortField) return 0;
+
+        const aValue = a[sortField];
+        const bValue = b[sortField];
+
+        const aNum = Number(aValue);
+        const bNum = Number(bValue);
+
+        if (!isNaN(aNum) && !isNaN(bNum)) {
+          return sortDir === "asc" ? aNum - bNum : bNum - aNum;
+        }
+
+        return sortDir === "asc"
+          ? String(aValue ?? "").localeCompare(String(bValue ?? ""))
+          : String(bValue ?? "").localeCompare(String(aValue ?? ""));
+      });
+  }, [data, datainfo, search, sortField, sortDir]);
+
+  // ✅ pagination (FIXED dependencies)
+  const paginatedData = useMemo(() => {
+    const start = (page - 1) * pageSize;
+    return filteredData.slice(start, start + pageSize);
+  }, [filteredData, page, pageSize]);
+
+  // ✅ reset page when filters change
+  useEffect(() => {
+    setPage(1);
+  }, [search, sortField, sortDir, pageSize]);
+
+  return (
+    <div className="bg-white rounded-2xl border border-zinc-200 shadow-sm overflow-hidden">
+      {/* HEADER */}
+      <div className="flex items-center justify-between px-5 py-3 border-b bg-zinc-50">
+        <div className="text-sm font-semibold text-zinc-700 ">جدول داده‌ها</div>
+
+        <TableSearch value={search} onChange={setSearch} />
+      </div>
+
+      {/* TABLE */}
+      <div className="overflow-x-auto">
+        <table className="w-full border-collapse text-sm table-fixed">
+          {" "}
+          <TableHeader
+            datainfo={datainfo}
+            activityField={activityField}
+            sortField={sortField}
+            sortDir={sortDir}
+            onSort={handleSort}
+          />
+          <TableBody
+            data={paginatedData}
+            datainfo={datainfo}
+            activityField={activityField}
+          />
+        </table>
+      </div>
+
+      {/* PAGINATION */}
+      <TablePagination
+        page={page}
+        pageSize={pageSize}
+        total={filteredData.length}
+        onPageChange={setPage}
+        onPageSizeChange={(size: number) => {
+          setPageSize(size);
+          setPage(1);
+        }}
+      />
+    </div>
+  );
+};
+
+export default Table;

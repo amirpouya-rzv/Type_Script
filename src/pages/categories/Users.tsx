@@ -1,112 +1,52 @@
-import ConfirmModal from "@/components/shared/ConfirmModal";
-import SearchInput from "@/components/shared/SearchInput";
-import { deleteUsersServices, getUsersServices } from "@/services/UsersServices";
-import { AddUserType } from "@/types/UsersType";
-import { successToast } from "@/utils/toastUtils";
-import { useEffect, useState } from "react";
-import { BiTrash } from "react-icons/bi";
-import { FaEdit, FaRegTrashAlt } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { MdOutlineDelete, MdOutlineEdit } from "react-icons/md";
+import React from "react";
+import Table from "@/components/table/Table";
+
 const Users = () => {
-  // state for data
-  const [data, setData] = useState<AddUserType[]>([]);
-  const [showModal, setShowModal] = useState<boolean>(false);
-  const [selectedUser, setSelectedUser] = useState<AddUserType | null>(null);
+  // fetch information from api
+  const data = [
+    { id: 1, name: "Leanne Graham", username: "Bret", email: "Sincere@april.biz", phone: "1-770-736-8031", website: "hildegard.org" },
+    { id: 2, name: "Ervin Howell",  username: "Antonette", email: "Shanna@melissa.tv", phone: "010-692-6593", website: "anastasia.net" },
+    { id: 3, name: "Ervin Howell",  username: "Antonette", email: "Shanna@melissa.tv", phone: "010-692-6593", website: "anastasia.net" },
+    { id: 4, name: "Ervin Howell",  username: "Antonette", email: "Shanna@melissa.tv", phone: "010-692-6593", website: "anastasia.net" },
+    { id: 5, name: "Ervin Howell",  username: "Antonette", email: "Shanna@melissa.tv", phone: "010-692-6593", website: "anastasia.net" },
+    { id: 6, name: "Ervin Howell",  username: "Antonette", email: "Shanna@melissa.tv", phone: "010-692-6593", website: "anastasia.net" },
+  ];
 
-  // get data
-  const handleGetData = async () => {
-    const res = await getUsersServices();
-    setData(res);
-  };
+// table title
+  const datainfo = [
+    { field: "id",       title: "#" },
+    { field: "name",     title: "نام" },
+    { field: "username", title: "نام کاربری" },
+    { field: "email",    title: "ایمیل" },
+    { field: "phone",    title: "تلفن" },
+    { field: "website",  title: "وبسایت" },
+  ];
 
-  useEffect(() => {
-    handleGetData();
-  }, []);
-
-  // open modal before delete
-  const handleDeleteItem = (value: AddUserType) => {
-    setSelectedUser(value);
-    setShowModal(true);
-  };
-
-  // confirm delete
-  const handleConfirmDelete = async () => {
-    if (!selectedUser) return;
-
-    const res = await deleteUsersServices(selectedUser.id); // id رو پاس بده
-    if (res.status === 200) {
-      const newList = data.filter((user) => user.id !== selectedUser.id);
-      setData(newList);
-      successToast("User deleted successfully");
-    }
-    setShowModal(false);
-    setSelectedUser(null);
+    // activityField
+  const activityField = {
+    title: "عملیات",
+    element: (row: Record<string, any>) => (
+      <div className="flex justify-center gap-2">
+        <button
+          onClick={() => console.log("delete", row.id)}
+          className="text-red-500 hover:text-red-700 transition-colors"
+        >
+          <MdOutlineDelete size={18} />
+        </button>
+        <button
+          onClick={() => console.log("edit", row.id)}
+          className="text-blue-500 hover:text-blue-700 transition-colors"
+        >
+          <MdOutlineEdit size={18} />
+        </button>
+      </div>
+    ),
   };
 
   return (
-    <div className="p-4">
-     <div className="flex justify-between">
-       <SearchInput/>
-      <Link to={'/users/addusers'}>
-        <button >add user </button>
-      </Link>
-     </div>
-      <div className="overflow-x-hidden rounded-xl shadow-lg">
-        <table className="w-full table-auto text-sm dark:text-white hover:bg-slate-300 bg-slate-200 text-black dark:bg-stone-800 rounded-xl overflow-hidden">
-          <thead className="dark:bg-stone-700 bg-slate-400 dark:text-white">
-            <tr className="[&>th]:px-4 [&>th]:py-3 [&>th]:text-center">
-              <th className="hidden md:block">#</th>
-              <th>Name</th>
-              <th className="hidden md:block">UserName</th>
-              <th>Email</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.length > 0 ? (
-              data.map((value) => (
-                <tr
-                  className="[&>td]:px-4 [&>td]:py-3 [&>td]:text-center text-center border-b border-stone-700 dark:hover:bg-stone-900 hover:bg-slate-500 transition-colors duration-200"
-                  key={value.id}
-                >
-                  <td>{value.id}</td>
-                  <td>{value.username}</td>
-                  <td>{value.name}</td>
-                  <td>{value.email}</td>
-                  <td className="flex gap-2 justify-center">
-                    <button className="text-emerald-700">
-                      <FaEdit />
-                    </button>
-                    <button
-                      onClick={() => handleDeleteItem(value)}
-                      className="text-rose-700"
-                    >
-                      <FaRegTrashAlt />
-                    </button>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={5} className="text-center py-4">
-                  Nothing here
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
-
-      {/* confirm modal */}
-      <ConfirmModal
-        icon={BiTrash}
-        isOpen={showModal}
-        onCancel={() => setShowModal(false)}
-        onConfirm={handleConfirmDelete}
-        title="Delete User"
-        message={`?Are you sure you want to delete ${selectedUser?.name || "this user"
-          }`}
-      />
+    <div>
+      <Table datainfo={datainfo} data={data} activityField={activityField} />
     </div>
   );
 };
