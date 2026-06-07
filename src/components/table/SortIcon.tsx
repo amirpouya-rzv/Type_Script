@@ -7,7 +7,7 @@ type Props = {
 
 const SortIcon = ({ active, dir }: Props) => {
   if (!active)
-    return <ChevronsUpDown size={14} className="text-zinc-400" />;
+    return <ChevronsUpDown size={14} className="text-zinc-400 bac" />;
 
   return dir === "asc" ? (
     <ChevronUp size={14} className="text-emerald-600" />

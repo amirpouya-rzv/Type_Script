@@ -16,7 +16,7 @@ const Pagination = ({
   const totalPages = Math.max(1, Math.ceil(total / pageSize));
 
   return (
-    <div className="flex items-center justify-between px-4 py-3 border-t bg-zinc-50 text-sm">
+    <div className="flex items-center justify-between px-4 py-3 border-t backdrop-blur-sm text-sm">
       
       {/* LEFT */}
       <div className="text-zinc-600 flex items-center gap-3">

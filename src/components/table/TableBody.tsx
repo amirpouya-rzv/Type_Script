@@ -4,10 +4,10 @@ const TableBody = ({ data, datainfo, activityField }: any) => {
       {data.map((row: any, i: number) => (
         <tr
           key={row.id ?? i}
-          className="border-b dark:text-white dark:bg-black hover:bg-emerald-50/30 hover:shadow-lg"
+          className="border-b hover:shadow-xl"
         >
           {datainfo.map((col: any) => (
-            <td key={col.field} className="px-4 py-3 text-center ">
+            <td key={col.field} className="px-4 py-3 text-center">
               {row[col.field]}
             </td>
           ))}

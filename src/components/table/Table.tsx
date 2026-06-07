@@ -67,10 +67,10 @@ const Table = ({ data, datainfo, activityField }: TableProps) => {
   }, [search, sortField, sortDir, pageSize]);
 
   return (
-    <div className="bg-white rounded-2xl border border-zinc-200 shadow-sm overflow-hidden">
+    <div className="backdrop-blur-sm rounded-2xl border-2 border-black/30 dark:bg-black/30 shadow-2xl overflow-hidden">
       {/* HEADER */}
-      <div className="flex items-center justify-between px-5 py-3 border-b bg-zinc-50">
-        <div className="text-sm font-semibold text-zinc-700 ">جدول داده‌ها</div>
+      <div className="flex items-center justify-between px-5 py-3 border-b">
+        <div className="text-sm font-semibold text-white ">جدول داده‌ها</div>
 
         <TableSearch value={search} onChange={setSearch} />
       </div>

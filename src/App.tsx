@@ -20,6 +20,7 @@ function App() {
 
   return (
     <main>
+      <img src="/picture/images.jpg" style={{width:"230vh", height:"100vh" }}/>
       <Content />
       <Header />
       <SideBar />

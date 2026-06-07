@@ -17,14 +17,14 @@ const TableHeader = ({
 }: Props) => {
   return (
     <thead>
-      <tr className="bg-zinc-50 border-b dark:text-white dark:bg-black">
+      <tr className="bg-zinc-50 dark:bg-inherit border-b dark:text-white ">
         {datainfo.map((col) => (
           <th
             key={col.field}
             onClick={() => onSort(col.field)}
-            className="px-4 py-3 text-center text-xs font-semibold cursor-pointer  shadow-lg"
+            className="px-4 py-3 text-center text-xs font-semibold cursor-pointer  shadow-xl"
           >
-            <div className="flex justify-center gap-1">
+            <div className="flex justify-center gap-1 ">
               {col.title}
               <SortIcon
                 active={sortField === col.field}

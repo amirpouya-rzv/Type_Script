@@ -7,7 +7,7 @@ type Props = {
 
 const TableSearch = ({ value, onChange }: Props) => {
   return (
-    <div className="flex items-center gap-2 bg-white border border-zinc-200 rounded-lg px-3 h-9">
+    <div className="flex items-center gap-2 bg-white  border border-zinc-200 rounded-lg px-3 h-9">
       <Search size={14} className="text-zinc-400" />
       <input
         value={value}
