@@ -4,7 +4,7 @@ const TableBody = ({ data, datainfo, activityField }: any) => {
       {data.map((row: any, i: number) => (
         <tr
           key={row.id ?? i}
-          className="border-b hover:shadow-xl"
+          className="border-t-2 hover:shadow-xl  hover:font-bold"
         >
           {datainfo.map((col: any) => (
             <td key={col.field} className="px-4 py-3 text-center">

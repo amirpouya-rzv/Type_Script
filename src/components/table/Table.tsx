@@ -1,8 +1,5 @@
-"use client";
-
 import React, { useMemo, useState, useEffect } from "react";
 import { TableProps } from "@/types/TableTypes";
-
 import TableSearch from "./TableSearch";
 import TableHeader from "./TableHeader";
 import TableBody from "./TableBody";
@@ -13,7 +10,7 @@ const Table = ({ data, datainfo, activityField }: TableProps) => {
   const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
   const [search, setSearch] = useState("");
 
-  // ✅ pagination state (FIXED)
+  // pagination 
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
 
@@ -26,7 +23,7 @@ const Table = ({ data, datainfo, activityField }: TableProps) => {
     }
   };
 
-  // ✅ filter + sort
+  // filter + sort
   const filteredData = useMemo(() => {
     return data
       .filter((row) =>
@@ -55,13 +52,13 @@ const Table = ({ data, datainfo, activityField }: TableProps) => {
       });
   }, [data, datainfo, search, sortField, sortDir]);
 
-  // ✅ pagination (FIXED dependencies)
+  //  pagination
   const paginatedData = useMemo(() => {
     const start = (page - 1) * pageSize;
     return filteredData.slice(start, start + pageSize);
   }, [filteredData, page, pageSize]);
 
-  // ✅ reset page when filters change
+  //  reset page when filters change
   useEffect(() => {
     setPage(1);
   }, [search, sortField, sortDir, pageSize]);
@@ -78,7 +75,6 @@ const Table = ({ data, datainfo, activityField }: TableProps) => {
       {/* TABLE */}
       <div className="overflow-x-auto">
         <table className="w-full border-collapse text-sm table-fixed">
-          {" "}
           <TableHeader
             datainfo={datainfo}
             activityField={activityField}
