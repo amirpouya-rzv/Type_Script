@@ -15,7 +15,7 @@ import { Label } from "@/components/ui/label"
 
 export function DialogDemo() {
   return (
-    <Dialog>
+    <Dialog >
       <form>
         <DialogTrigger asChild>
           <Button variant="outline">Open Dialog</Button>
