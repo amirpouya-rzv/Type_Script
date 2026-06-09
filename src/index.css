@@ -2,6 +2,8 @@
 @import "tw-animate-css";
 @import "@fontsource-variable/geist";
 
+@variant dark (&:where(.dark, .dark *));
+
 @font-face {
   font-family: BYekan;
   src: url("./assets/fonts/Shabnam-Light-WOL.ttf") format("truetype");

@@ -1,26 +1,29 @@
-import axios, { Method } from "axios";
+import axios, { AxiosResponse } from "axios";
 import config from "./config";
+import { errorToast } from "@/utils/toastUtils";
 
-type HttpServiceProps = {
-  url: string;
-  method: Method;
-  data?: unknown;
-  headers?: Record<string, string>;
+export const apipath = config.onlinePath;
+
+axios.interceptors.response.use(
+  (res) => res,
+  (error) => {
+    const message =
+      error?.response?.data?.message ||
+      error?.message ||
+      "Something went wrong";
+
+    errorToast(message);
+
+    return Promise.reject(error);
+  }
+);
+
+const httpService = <T>(
+  url: string,
+  method: "get" | "post" | "put" | "delete" | "patch",
+  data?: unknown,
+): Promise<AxiosResponse<T>> => {
+  return axios({ baseURL: apipath + url, method, data });
 };
 
-const httpService = ({ url, method, data, headers }: HttpServiceProps) => {
-  const token = localStorage.getItem("token");
-
-  return axios({
-    url: config.onlinePath + url,
-    method,
-    data,
-    headers: {
-      ...headers,
-      Authorization: token ? `Bearer ${token}` : undefined,
-      "Content-Type": "application/json",
-    },
-  });
-};
-
-export default httpService; 
+export default httpService;
