@@ -66,9 +66,10 @@ const Header = () => {
               <DropdownMenuItem
                 className=" border-y text-dark_red border-light_red"
                 variant="destructive"
+                onClick={()=>{localStorage.removeItem('loginToken')}}
               >
                 <LogOutIcon />
-                Log out
+                خروج
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

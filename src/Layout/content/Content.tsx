@@ -12,7 +12,7 @@ const Content = () => {
         <div className="w-full p-4">
           <Routes>
             <Route path="/auth/login" element={<Login />} />
-            <Route path="/categories" element={<CategoriTable />} />
+            <Route path="/" element={<CategoriTable />} />
           </Routes>
         </div>
       </section>

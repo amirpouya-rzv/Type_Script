@@ -4,6 +4,7 @@ import Header from "./Layout/header/Header"
 import SideBar from "./Layout/sidebar/SideBar"
 import { useAppSelector } from "./redux/ui_management/reduxHook"
 import { ToastContainer } from "react-toastify"
+import Layout from "./Layout/Layout"
 
 
 function App() {
@@ -18,12 +19,11 @@ function App() {
     }
   }, [them])
 
+  
   return (
     <main>
       <img src="/picture/images.jpg" style={{width:"230vh", height:"100vh" }}/>
-      <Content />
-      <Header />
-      <SideBar />
+      <Layout/>
       <ToastContainer stacked/>
     </main>
   )
