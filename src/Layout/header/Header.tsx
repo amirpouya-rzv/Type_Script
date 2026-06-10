@@ -19,9 +19,13 @@ import {
 import { converMiladi2Jalali } from "@/utils/dateutils";
 import { setShowSidebar } from "@/redux/ui_management/uiManagement";
 import { GiHobbitDwelling } from "react-icons/gi";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const dispatch = useDispatch();
+
+  const navigate = useNavigate()
+
 
   return (
     <section
@@ -66,7 +70,7 @@ const Header = () => {
               <DropdownMenuItem
                 className=" border-y text-dark_red border-light_red"
                 variant="destructive"
-                onClick={()=>{localStorage.removeItem('loginToken')}}
+                onClick={()=>(localStorage.removeItem('loginToken'), navigate('/auth/login'))}
               >
                 <LogOutIcon />
                 خروج
