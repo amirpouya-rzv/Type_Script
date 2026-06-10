@@ -5,6 +5,7 @@ import SideBar from "./Layout/sidebar/SideBar"
 import { useAppSelector } from "./redux/ui_management/reduxHook"
 import { ToastContainer } from "react-toastify"
 import Layout from "./Layout/Layout"
+import { Navigate, useLocation } from "react-router-dom"
 
 
 function App() {
@@ -19,14 +20,24 @@ function App() {
     }
   }, [them])
 
+  const location = useLocation()
   
-  return (
-    <main>
-      <img src="/picture/images.jpg" style={{width:"230vh", height:"100vh" }}/>
-      <Layout/>
-      <ToastContainer stacked/>
-    </main>
-  )
+ return (
+  <main>
+    {location.pathname.startsWith("/auth") ? (
+      <Content />
+    ) : (
+      <>
+        <img
+          src="/picture/images.jpg"
+          style={{ width: "230vh", height: "100vh" }}
+        />
+        <Layout />
+        <ToastContainer stacked />
+      </>
+    )}
+  </main>
+);
 }
 
 export default App

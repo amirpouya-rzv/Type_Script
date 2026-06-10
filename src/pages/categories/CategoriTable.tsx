@@ -12,7 +12,7 @@ const CategoriTable = () => {
       const res = await getCategories();
 
       if (res.status == 200) {
-        setData(res.data.data)
+        setData(res.data)
         console.log(res.data);
       } else {
         errorToast(res.data.message);

@@ -1,14 +1,30 @@
+import useIsLogin from '@/hooks/authHook';
 import Login from '@/pages/auth/Login';
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
+
+
+  const [loading, login] = useIsLogin();
+
 
 const AuthLayout = () => {
     return (
-        <div>
+
+<div>
+       {loading ? (
+        <h1>please waite</h1>
+      ) : !login ? (
+          <Navigate to={"/auth/login"} />
+      ) : (
+         <div>
             <Routes>
                 <Route path='/auth/login' element={<Login/>}/>
             </Routes>
         </div>
+      )}
+</div>
+
+        
+       
     );
 };
 
