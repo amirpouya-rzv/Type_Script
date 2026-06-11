@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+type loginTokenType = {
+token: string;
+};
 const useIsLogin = () =>{
-    type loginTokenType = {
-    token: string;
-  };
 
   const [login, setLogin] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);

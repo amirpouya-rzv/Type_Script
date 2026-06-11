@@ -40,7 +40,8 @@ export default function Login() {
     try {
       const res = await loginUser(values);
       if (res.status === 200) {
-        localStorage.setItem('loginToken', JSON.stringify(res.data))
+        localStorage.setItem('loginToken', res.data.token)
+        console.log(localStorage.getItem('loginToken'))
         successToast(res.message || "خوش آمدید!");
         navigate('/')
       } else {

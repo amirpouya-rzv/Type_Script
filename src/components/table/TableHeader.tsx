@@ -24,7 +24,7 @@ const TableHeader = ({
             onClick={() => onSort(col.field)}
             className="px-4 py-3 text-center text-xs font-semibold cursor-pointer  shadow-xl"
           >
-            <div className="flex justify-center gap-1 ">
+            <div className="flex justify-center gap-1 text-right">
               {col.title}
               <SortIcon
                 active={sortField === col.field}

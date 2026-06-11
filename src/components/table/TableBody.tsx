@@ -13,7 +13,7 @@ const TableBody = ({ data, datainfo, activityField }: any) => {
           ))}
 
           {activityField && (
-            <td className="px-4 py-3 text-center ">
+            <td className="px-16 py-3 text-center">
               {activityField.element(row)}
             </td>
           )}
