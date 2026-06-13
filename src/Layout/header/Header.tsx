@@ -16,7 +16,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { converMiladi2Jalali } from "@/utils/dateutils";
-import { setShowSidebar } from "@/redux/ui_management/uiManagement";
+import { setShowSidebar, togleCollapsed } from "@/redux/ui_management/uiManagement";
+import { useAppSelector } from "@/redux/ui_management/reduxHook";
 import { GiAlarmClock } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
 import { MdOutlineDateRange } from "react-icons/md";
@@ -25,65 +26,68 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [currentTime, setCurrentTime] = useState("");
+  const { collapsed } = useAppSelector((state) => state.uiManagerReducer);
 
-  // تابع برای فرمت کردن زمان
-  const checkTime = (i) => {
-    if (i < 10) {
-      i = "0" + i;
-    }
+  const checkTime = (i: number) => {
+    if (i < 10) return "0" + i;
     return i;
   };
 
   const updateTime = () => {
     const today = new Date();
-    let h = today.getHours();
-    let m = today.getMinutes();
-    let s = today.getSeconds();
-    m = checkTime(m);
-    s = checkTime(s);
+    const h = today.getHours();
+    const m = checkTime(today.getMinutes());
+    const s = checkTime(today.getSeconds());
     setCurrentTime(`${h}:${m}:${s}`);
   };
 
   useEffect(() => {
-    updateTime(); // اجرای اولیه
-    const timer = setInterval(updateTime, 1000); 
-    
+    updateTime();
+    const timer = setInterval(updateTime, 1000);
     return () => clearInterval(timer);
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('loginToken');
-    navigate('/auth/login');
+    localStorage.removeItem("loginToken");
+    navigate("/auth/login");
   };
 
   return (
     <section
       id="header"
-      className="fixed top-0 h-app_header_h w-full shadow-lg backdrop-blur-sm 
-  dark:text-white md:pr-app_sidebar_w border-b border-dark_green dark:shadow-white dark:shadow-sm border-b-dark_green dark:border-white"
+      className={`fixed top-0 h-app_header_h w-full shadow-lg backdrop-blur-sm
+        dark:text-white border-b border-dark_green dark:shadow-white dark:shadow-sm
+        dark:border-white transition-all duration-300
+        ${collapsed ? "md:pr-16 pr-app_sidebar_w" : "pr-app_sidebar_w"}`}
     >
       <span className="flex items-center justify-between">
-        <div className="flex items-center justify-between p-4">
+        <div className="flex items-center justify-between gap-20 -mx-52 md:mx-0 p-4">
 
+          {/* دکمه موبایل */}
           <button
-            className="md:hidden mt-4 mx-2"
+            className="md:hidden mt-4 -mx-20"
             onClick={() => dispatch(setShowSidebar(true))}
-            >
+          >
             <Menu size={24} />
           </button>
-            {/* claender and oclock */}
 
-            {/* clender */}
+          {/* دکمه collapse دسکتاپ */}
+          <button
+            className="hidden md:block mt-4 mx-2 transition-all hover:scale-110"
+            onClick={() => dispatch(togleCollapsed())}
+          >
+            <Menu size={24} />
+          </button>
+
+          {/* تاریخ و ساعت */}
           <div className="flex gap-1 mt-4 mx-5 items-center">
-            <MdOutlineDateRange className="text-rose-600 dark:text-dark_red" size={20}/>
-
-            {/* oclock */}
+            <MdOutlineDateRange className="text-rose-600 dark:text-dark_red" size={20} />
             <span>{converMiladi2Jalali(undefined, "jYYYY/jMM/jD")}</span>-
             <span className="font-mono">{currentTime}</span>
-            <GiAlarmClock className="text-cyan-600 dark:text-dark_Blue" size={20}/>
+            <GiAlarmClock className="text-cyan-600 dark:text-dark_Blue" size={20} />
           </div>
-          <span className="flex gap-2 justify-end items-center"></span>
         </div>
+
         <div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
