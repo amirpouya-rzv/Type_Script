@@ -64,17 +64,23 @@ const Header = () => {
     >
       <span className="flex items-center justify-between">
         <div className="flex items-center justify-between p-4">
+
           <button
             className="md:hidden mt-4 mx-2"
             onClick={() => dispatch(setShowSidebar(true))}
-          >
+            >
             <Menu size={24} />
           </button>
+            {/* claender and oclock */}
+
+            {/* clender */}
           <div className="flex gap-1 mt-4 mx-5 items-center">
-            <MdOutlineDateRange className="text-rose-600" size={20}/>
+            <MdOutlineDateRange className="text-rose-600 dark:text-dark_red" size={20}/>
+
+            {/* oclock */}
             <span>{converMiladi2Jalali(undefined, "jYYYY/jMM/jD")}</span>-
             <span className="font-mono">{currentTime}</span>
-            <GiAlarmClock className="text-cyan-600" size={20}/>
+            <GiAlarmClock className="text-cyan-600 dark:text-dark_Blue" size={20}/>
           </div>
           <span className="flex gap-2 justify-end items-center"></span>
         </div>

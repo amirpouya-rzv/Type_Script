@@ -7,12 +7,13 @@ import { FaDeleteLeft } from "react-icons/fa6";
 import { GrEdit } from "react-icons/gr";
 import { BiDetail } from "react-icons/bi";
 import { FaSitemap } from "react-icons/fa6";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { TooltipSides } from "@/components/shared/Toolip";
+// import {
+//   Tooltip,
+//   TooltipContent,
+//   TooltipProvider,
+//   TooltipTrigger,
+// } from "@/components/ui/tooltip";
 const CategoriTable = () => {
   const [data, setData] = useState<CategoryType>([]);
 
@@ -35,6 +36,8 @@ const CategoriTable = () => {
     handelgetcategorylist();
   }, []);
 
+
+  // datainfo
   const datainfo = [
     { field: "id", title: "#" },
     { field: "title", title: "نام" },
@@ -42,74 +45,30 @@ const CategoriTable = () => {
     { field: "created_at", title: "اضافه شده در" },
   ];
 
+// activityField
   const activityField = {
-    title: "عملیات",
-    element: (row: any) => (
-      <TooltipProvider delayDuration={100}>
-        <div className="flex gap-2">
-          {/* Tooltip جزئیات */}
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <button
-                className="text-sky-500 cursor-pointer"
-                onClick={() => alert(row.title)}
-              >
-                <BiDetail />
-              </button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>جزئیات</p>
-            </TooltipContent>
-          </Tooltip>
+  title: "عملیات",
+  element: (row: any) => {
+    const actions = [
+      { title: "جزئیات", icon: <BiDetail />, color: "text-sky-500", onClick: () => alert(row.title) },
+      { title: "زیرمجموعه‌ها", icon: <FaSitemap />, color: "text-amber-500", onClick: () => alert(row.title) },
+      { title: "ویرایش", icon: <GrEdit />, color: "text-green-500", onClick: () => alert(row.title) },
+      { title: "حذف", icon: <FaDeleteLeft />, color: "text-rose-500", onClick: () => alert(row.id) },
+    ]
 
-          {/* Tooltip زیرمجموعه‌ها */}
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <button
-                className="text-amber-500 cursor-pointer"
-                onClick={() => alert(row.title)}
-              >
-                <FaSitemap />
-              </button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>زیرمجموعه‌ها</p>
-            </TooltipContent>
-          </Tooltip>
-
-          {/* Tooltip ویرایش */}
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <button
-                className="text-green-500 cursor-pointer"
-                onClick={() => alert(row.title)}
-              >
-                <GrEdit />
-              </button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>ویرایش</p>
-            </TooltipContent>
-          </Tooltip>
-
-          {/* Tooltip حذف */}
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <button
-                className="text-rose-500 cursor-pointer"
-                onClick={() => alert(row.id)}
-              >
-                <FaDeleteLeft />
-              </button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>حذف</p>
-            </TooltipContent>
-          </Tooltip>
-        </div>
-      </TooltipProvider>
-    ),
-  };
+    return (
+      <div className="flex gap-2">
+        {actions.map((action) => (
+          <TooltipSides key={action.title} title={action.title} side="top">
+            <button className={`${action.color} cursor-pointer`} onClick={action.onClick}>
+              {action.icon}
+            </button>
+          </TooltipSides>
+        ))}
+      </div>
+    )
+  }
+}
 
   return (
     <Table data={data} datainfo={datainfo} activityField={activityField} />
