@@ -16,18 +16,21 @@ import { TooltipSides } from "@/components/shared/Toolip";
 // } from "@/components/ui/tooltip";
 const CategoriTable = () => {
   const [data, setData] = useState<CategoryType>([]);
-
+  const [loading,setloading] = useState(true)
   const handelgetcategorylist = async () => {
     try {
       const res = await getCategories();
-
+setloading(true)
       if (res.status == 200) {
+        setloading(false)
         setData(res.data.data);
         console.log(res.data);
       } else {
+        setloading(false)
         errorToast(res.data.message);
       }
     } catch (error) {
+      setloading(false) 
       errorToast(res.data.message);
     }
   };
@@ -71,7 +74,7 @@ const CategoriTable = () => {
 }
 
   return (
-    <Table data={data} datainfo={datainfo} activityField={activityField} />
+    <Table data={data} datainfo={datainfo} activityField={activityField} loading={loading}/>
   );
 };
 

@@ -105,3 +105,7 @@
 .Toastify__toast {
   font-family: BYekan;
 }
+
+#sidebar::-webkit-scrollbar {
+  display: none;
+}

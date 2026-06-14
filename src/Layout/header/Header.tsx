@@ -70,21 +70,22 @@ const Header = () => {
     >
       <span className="flex items-center justify-between">
         <div className="flex items-center justify-between gap-20 -mx-52 md:mx-0 p-4">
-          {/* دکمه موبایل */}
+
+          {/* دکمه من در موبایل */}
           <button
-            className="md:hidden mt-4 -mx-20"
+            className="md:hidden md:mt-4 -mx-20"
             onClick={() => dispatch(setShowSidebar(true))}
           >
             <Menu size={24} />
           </button>
 
-          {/* دکمه collapse دسکتاپ */}
+          {/* دکمه collapse  */}
 
           <button
-            className={`hidden rounded-full border-2 border-black/30 dark:bg-black/30 fixed  md:flex items-center justify-center w-8 h-8 bg-white shadow-md transition-all hover:scale-110 ${
+            className={`hidden rounded-full border-2 cursor-pointer border-black/30 dark:bg-black/30 fixed  md:flex items-center justify-center w-8 h-8 bg-white shadow-md transition-all hover:scale-110 ${
               collapsed ? "right-9" : "right-68"
             } top-6 -translate-x-1/2`}
-            onMouseOver={() => dispatch(togleCollapsed())}
+            onClick={() => dispatch(togleCollapsed())}
           >
             {collapsed ? (
               <IoIosArrowBack size={18} />
@@ -94,17 +95,18 @@ const Header = () => {
           </button>
 
           {/* تاریخ و ساعت */}
-          <div className="flex gap-1 mt-4 mx-5 items-center">
+          <div className="flex gap-1 md:mt-4 mx-5 items-center">
+            <span>{converMiladi2Jalali(undefined, "jYYYY/jMM/jD")}</span>
             <MdOutlineDateRange
               className="text-rose-600 dark:text-dark_red"
               size={20}
             />
-            <span>{converMiladi2Jalali(undefined, "jYYYY/jMM/jD")}</span>-
-            <span className="font-mono">{currentTime}</span>
+            <span>-</span>
             <GiAlarmClock
               className="text-cyan-600 dark:text-dark_Blue"
               size={20}
             />
+            <span className="font-mono">{currentTime}</span>
           </div>
         </div>
 
@@ -117,7 +119,7 @@ const Header = () => {
             </DropdownMenuTrigger>
             <DropdownMenuContent className=" backdrop-blur-md">
               <DropdownMenuItem className="gap-2 cursor-pointer">
-                <UserIcon className="h-4 w-4" />
+                <UserIcon className="h-4 w-4 hover:bg-black" />
                 Profile
               </DropdownMenuItem>
 

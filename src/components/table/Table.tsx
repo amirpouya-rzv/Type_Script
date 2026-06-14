@@ -4,13 +4,14 @@ import TableSearch from "./TableSearch";
 import TableHeader from "./TableHeader";
 import TableBody from "./TableBody";
 import TablePagination from "./Pagination";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import SkeletonLoader from "../shared/Skeleton";
 
-const Table = ({ data, datainfo, activityField }: TableProps) => {
+const Table = ({ data, datainfo, activityField, loading }: TableProps) => {
   const [sortField, setSortField] = useState<string | null>(null);
   const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
   const [search, setSearch] = useState("");
-
-  // pagination 
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
 
@@ -23,7 +24,6 @@ const Table = ({ data, datainfo, activityField }: TableProps) => {
     }
   };
 
-  // filter + sort
   const filteredData = useMemo(() => {
     return data
       .filter((row) =>
@@ -35,62 +35,56 @@ const Table = ({ data, datainfo, activityField }: TableProps) => {
       )
       .sort((a, b) => {
         if (!sortField) return 0;
-
         const aValue = a[sortField];
         const bValue = b[sortField];
-
         const aNum = Number(aValue);
         const bNum = Number(bValue);
-
         if (!isNaN(aNum) && !isNaN(bNum)) {
           return sortDir === "asc" ? aNum - bNum : bNum - aNum;
         }
-
         return sortDir === "asc"
           ? String(aValue ?? "").localeCompare(String(bValue ?? ""))
           : String(bValue ?? "").localeCompare(String(aValue ?? ""));
       });
   }, [data, datainfo, search, sortField, sortDir]);
 
-  //  pagination
   const paginatedData = useMemo(() => {
     const start = (page - 1) * pageSize;
     return filteredData.slice(start, start + pageSize);
   }, [filteredData, page, pageSize]);
 
-  //  reset page when filters change
   useEffect(() => {
     setPage(1);
   }, [search, sortField, sortDir, pageSize]);
 
   return (
     <div className="backdrop-blur-sm rounded-2xl border-2 border-black/30 shadow-2xl overflow-hidden">
-      {/* HEADER */}
       <div className="flex items-center justify-between px-5 py-3 border-b">
-        <div className="text-sm font-semibold text-white ">جدول داده‌ها</div>
-
+        <div className="text-sm font-semibold text-white">جدول داده‌ها</div>
         <TableSearch value={search} onChange={setSearch} />
       </div>
 
-      {/* TABLE */}
       <div className="overflow-x-auto">
-        <table className="w-full border-collapse text-sm table-fixed">
-          <TableHeader
-            datainfo={datainfo}
-            activityField={activityField}
-            sortField={sortField}
-            sortDir={sortDir}
-            onSort={handleSort}
-          />
-          <TableBody
-            data={paginatedData}
-            datainfo={datainfo}
-            activityField={activityField}
-          />
-        </table>
+        {loading ? (
+         <SkeletonLoader type="table" rows={5} />
+        ) : (
+          <table className="w-full border-collapse text-sm table-fixed">
+            <TableHeader
+              datainfo={datainfo}
+              activityField={activityField}
+              sortField={sortField}
+              sortDir={sortDir}
+              onSort={handleSort}
+            />
+            <TableBody
+              data={paginatedData}
+              datainfo={datainfo}
+              activityField={activityField}
+            />
+          </table>
+        )}
       </div>
 
-      {/* PAGINATION */}
       <TablePagination
         page={page}
         pageSize={pageSize}

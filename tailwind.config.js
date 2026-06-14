@@ -29,5 +29,5 @@ export default {
       },
     },
   },
-  plugins: [],  // ← خالی
+  plugins: ['tailwind-scrollbar-hide'],  // ← خالی
 }

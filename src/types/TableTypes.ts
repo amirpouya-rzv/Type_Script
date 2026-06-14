@@ -10,8 +10,10 @@ export interface ActivityField {
   element: (row: Record<string, any>) => ReactNode;
 }
 
+// TableTypes.ts
 export interface TableProps {
-  data: Record<string, any>[];
-  datainfo: DataInfo[];
-  activityField?: ActivityField;
+  data: any[];
+  datainfo: any[];
+  activityField: any;
+  loading?: boolean;  
 }
