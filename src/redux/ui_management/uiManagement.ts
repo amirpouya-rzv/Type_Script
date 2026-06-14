@@ -5,13 +5,13 @@ type ThemType = "light" | "dark";
 type InitialStateType = {
   showsidebar: boolean;
   them: ThemType;
-  collapsed: boolean; // ✅ اضافه شد
+  collapsed: boolean; 
 };
 
 const initialState: InitialStateType = {
   showsidebar: false,
   them: localStorage.getItem("them") as ThemType || "light",
-  collapsed: false, // ✅ اضافه شد
+  collapsed: false, 
 };
 
 const uiManagerSlice = createSlice({
@@ -33,7 +33,7 @@ const uiManagerSlice = createSlice({
       localStorage.setItem("them", action.payload);
     },
 
-    togleCollapsed: (state) => { // ✅ اضافه شد
+    togleCollapsed: (state) => { 
       state.collapsed = !state.collapsed;
     },
   },

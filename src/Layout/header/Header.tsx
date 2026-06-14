@@ -16,11 +16,15 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { converMiladi2Jalali } from "@/utils/dateutils";
-import { setShowSidebar, togleCollapsed } from "@/redux/ui_management/uiManagement";
+import {
+  setShowSidebar,
+  togleCollapsed,
+} from "@/redux/ui_management/uiManagement";
 import { useAppSelector } from "@/redux/ui_management/reduxHook";
 import { GiAlarmClock } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
 import { MdOutlineDateRange } from "react-icons/md";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -55,14 +59,13 @@ const Header = () => {
   return (
     <section
       id="header"
-      className={`fixed top-0 h-app_header_h w-full shadow-lg backdrop-blur-sm
-        dark:text-white border-b border-dark_green dark:shadow-white dark:shadow-sm
+      className={`fixed top-0 h-app_header_h w-full shadow-xl backdrop-blur-sm
+        dark:text-white border-b border-black/30  dark:shadow-white dark:shadow-sm
         dark:border-white transition-all duration-300
         ${collapsed ? "md:pr-16 pr-app_sidebar_w" : "pr-app_sidebar_w"}`}
     >
       <span className="flex items-center justify-between">
         <div className="flex items-center justify-between gap-20 -mx-52 md:mx-0 p-4">
-
           {/* دکمه موبایل */}
           <button
             className="md:hidden mt-4 -mx-20"
@@ -72,19 +75,32 @@ const Header = () => {
           </button>
 
           {/* دکمه collapse دسکتاپ */}
+
           <button
-            className="hidden md:block mt-4 mx-2 transition-all hover:scale-110"
-            onClick={() => dispatch(togleCollapsed())}
+            className={`hidden rounded-full border-2 border-black/30 dark:bg-black/30 fixed  md:flex items-center justify-center w-8 h-8 bg-white shadow-md transition-all hover:scale-110 ${
+              collapsed ? "right-9" : "right-68"
+            } top-6 -translate-x-1/2`}
+            onMouseOver={() => dispatch(togleCollapsed())}
           >
-            <Menu size={24} />
+            {collapsed ? (
+              <IoIosArrowBack size={18} />
+            ) : (
+              <IoIosArrowForward size={18} />
+            )}
           </button>
 
           {/* تاریخ و ساعت */}
           <div className="flex gap-1 mt-4 mx-5 items-center">
-            <MdOutlineDateRange className="text-rose-600 dark:text-dark_red" size={20} />
+            <MdOutlineDateRange
+              className="text-rose-600 dark:text-dark_red"
+              size={20}
+            />
             <span>{converMiladi2Jalali(undefined, "jYYYY/jMM/jD")}</span>-
             <span className="font-mono">{currentTime}</span>
-            <GiAlarmClock className="text-cyan-600 dark:text-dark_Blue" size={20} />
+            <GiAlarmClock
+              className="text-cyan-600 dark:text-dark_Blue"
+              size={20}
+            />
           </div>
         </div>
 

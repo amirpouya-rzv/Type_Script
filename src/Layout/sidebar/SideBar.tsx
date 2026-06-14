@@ -18,7 +18,7 @@ const SideBar = () => {
       id="sidebar"
       className={`fixed md:right-0 top-0 h-screen
             dark:text-white text-black md:block border-l backdrop-blur-sm
-            border-dark_green transition-all duration-300
+            border-black/30 transition-all duration-300
             ${collapsed ? "md:w-16 w-app_sidebar_w" : "w-app_sidebar_w"}
             ${showsidebar ? "right-0" : "-right-full"}`}
     >
@@ -32,7 +32,7 @@ const SideBar = () => {
         </button>
       </div>
 
-      <hr className="border-black shadow-2xl mt-5 dark:border-white w-9/12 mx-auto" />
+      <hr className="border-black/30 shadow-2xl mt-5 dark:border-white w-9/12 mx-auto" />
 
       <div>
         <ul>
