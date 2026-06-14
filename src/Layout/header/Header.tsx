@@ -19,18 +19,22 @@ import { converMiladi2Jalali } from "@/utils/dateutils";
 import {
   setShowSidebar,
   togleCollapsed,
+  togleThem,
 } from "@/redux/ui_management/uiManagement";
 import { useAppSelector } from "@/redux/ui_management/reduxHook";
 import { GiAlarmClock } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
-import { MdOutlineDateRange } from "react-icons/md";
+import { MdOutlineClose, MdOutlineDateRange } from "react-icons/md";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-
+import DarkModeButtns from "../sidebar/DarkModeButtns";
+import { RiSunLine } from "react-icons/ri";
+import { BsMoon } from "react-icons/bs";
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [currentTime, setCurrentTime] = useState("");
   const { collapsed } = useAppSelector((state) => state.uiManagerReducer);
+  const { them } = useAppSelector((state) => state.uiManagerReducer);
 
   const checkTime = (i: number) => {
     if (i < 10) return "0" + i;
@@ -111,26 +115,42 @@ const Header = () => {
                 Open
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="mx-5 backdrop-blur-md">
-              <DropdownMenuItem>
-                <UserIcon className="ml-2 h-4 w-4" />
+            <DropdownMenuContent className=" backdrop-blur-md">
+              <DropdownMenuItem className="gap-2 cursor-pointer">
+                <UserIcon className="h-4 w-4" />
                 Profile
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <CreditCardIcon className="ml-2 h-4 w-4" />
+
+              <DropdownMenuItem className="gap-2 cursor-pointer">
+                <CreditCardIcon className="h-4 w-4" />
                 Billing
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <SettingsIcon className="ml-2 h-4 w-4" />
-                Settings
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
+
               <DropdownMenuItem
-                className="border-y text-dark_red border-light_red"
+                className="flex justify-between gap-2 cursor-pointer"
+                onClick={() => dispatch(togleThem())}
+              >
+                {them === "light" ? (
+                  <>
+                    حالت تاریک :
+                    <BsMoon size={18} className="text-gray-400" />
+                  </>
+                ) : (
+                  <>
+                    حالت روشن :
+                    <RiSunLine size={18} className="text-yellow-400" />
+                  </>
+                )}
+              </DropdownMenuItem>
+
+              <DropdownMenuSeparator />
+
+              <DropdownMenuItem
+                className="flex justify-between gap-2 cursor-pointer border-y text-dark_red border-light_red"
                 onClick={handleLogout}
               >
-                <LogOutIcon className="ml-2 h-4 w-4" />
                 خروج
+                <LogOutIcon className="h-4 w-4" />
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
