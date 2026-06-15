@@ -15,5 +15,7 @@ export interface TableProps {
   data: any[];
   datainfo: any[];
   activityField: any;
-  loading?: boolean;  
+  loading: boolean;  
+  tabletitle: string
+  dialog: ReactNode;
 }

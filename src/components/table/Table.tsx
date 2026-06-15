@@ -1,14 +1,19 @@
-import React, { useMemo, useState, useEffect } from "react";
+import  { useMemo, useState, useEffect } from "react";
 import { TableProps } from "@/types/TableTypes";
 import TableSearch from "./TableSearch";
 import TableHeader from "./TableHeader";
 import TableBody from "./TableBody";
 import TablePagination from "./Pagination";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
 import SkeletonLoader from "../shared/Skeleton";
 
-const Table = ({ data, datainfo, activityField, loading }: TableProps) => {
+const Table = ({
+  data,
+  datainfo,
+  activityField,
+  loading,
+  tabletitle,
+  dialog
+}: TableProps) => {
   const [sortField, setSortField] = useState<string | null>(null);
   const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
   const [search, setSearch] = useState("");
@@ -60,13 +65,18 @@ const Table = ({ data, datainfo, activityField, loading }: TableProps) => {
   return (
     <div className="backdrop-blur-sm rounded-2xl border-2 border-black/30 shadow-2xl overflow-hidden">
       <div className="flex items-center justify-between px-5 py-3 border-b">
-        <div className="text-sm font-semibold text-white">جدول داده‌ها</div>
-        <TableSearch value={search} onChange={setSearch} />
+        <div className="text-sm fke font-semibold text-black/50 dark:text-white">
+          {tabletitle}
+        </div>
+        <div className="flex items-center gap-5">
+          <TableSearch value={search} onChange={setSearch} />
+            {dialog}
+        </div>
       </div>
 
       <div className="overflow-x-auto">
         {loading ? (
-         <SkeletonLoader type="table" rows={5} />
+          <SkeletonLoader type="table" rows={5} />
         ) : (
           <table className="w-full border-collapse text-sm table-fixed">
             <TableHeader
