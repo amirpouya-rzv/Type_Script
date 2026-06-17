@@ -1,6 +1,6 @@
 import { useAppSelector } from "@/redux/ui_management/reduxHook";
 import Login from "@/pages/auth/Login";
-import CategoriTable from "@/pages/categories/CategoriTable";
+import CategoriTable from "@/pages/categories/CategoriAction";
 import { Route, Routes } from "react-router-dom";
 
 const Content = () => {
