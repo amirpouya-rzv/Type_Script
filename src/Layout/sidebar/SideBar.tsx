@@ -58,11 +58,7 @@ const SideBar = () => {
         {/* لیست آیتم‌ها */}
         <div onClick={() => dispatch(setShowSidebar(false))}>
           <ul>
-            <SideBarItem
-              to="/categories"
-              Icon={TbCategory}
-              title="دسته‌بندی‌ها"
-            />
+            <SideBarItem to="/categories" Icon={TbCategory} title="دسته‌بندی‌ها" />
           </ul>
         </div>
       </section>

@@ -1,7 +1,8 @@
 import { useAppSelector } from "@/redux/ui_management/reduxHook";
 import Login from "@/pages/auth/Login";
-import CategoriTable from "@/pages/categories/CategoriAction";
 import { Route, Routes } from "react-router-dom";
+import CategoryTable from "@/pages/categories/CategoryTable";
+import ActionCategory from "@/pages/categories/ActionCategory";
 
 const Content = () => {
   const { collapsed } = useAppSelector((state) => state.uiManagerReducer); // ✅ اضافه شد
@@ -18,7 +19,7 @@ const Content = () => {
         <div className="w-full p-4">
           <Routes>
             <Route path="/auth/login" element={<Login />} />
-            <Route path="/" element={<CategoriTable />} />
+            <Route path="/" element={<ActionCategory />} />
           </Routes>
         </div>
       </section>

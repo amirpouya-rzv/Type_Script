@@ -3,16 +3,25 @@ import { GrEdit } from "react-icons/gr";
 import { BiDetail } from "react-icons/bi";
 import { FaSitemap } from "react-icons/fa6";
 import { TooltipSides } from "@/components/shared/Toolip";
-import { DialogDemo } from "@/components/shared/Diloag";   // 👈 اضافه کن
-import { Field } from "@/components/ui/field";             // 👈 اضافه کن
-import { Input } from "@/components/ui/input";             // 👈 اضافه کن
-import { Label } from "@/components/ui/label";             // 👈 اضافه کن
+import { DialogDemo } from "@/components/shared/Diloag";
+import { converMiladi2Jalali } from "@/utils/dateutils";
+
 export const datainfo = [
   { field: "id", title: "#" },
   { field: "title", title: "نام" },
   { field: "descriptions", title: "توضیحات" },
-  { field: "created_at", title: "اضافه شده در" },
-];
+ { 
+    field: "created_at", 
+    title: "اضافه شده در",
+  render: (value: string) => converMiladi2Jalali(value, "jYYYY/jMM/jD")
+  },  
+{ 
+  field: "show_in_menu", 
+  title: "نمایش در منو",
+  render: (value: number) => value === 1 
+    ? <span className="text-green-500">✓ بله</span> 
+    : <span className="text-rose-500">✗ خیر</span>
+},];
 
 export const activityField = {
   title: "عملیات",
@@ -60,20 +69,15 @@ export const activityField = {
   },
 };
 
+export const categoryDialog = (
+  <DialogDemo
+    textbutton="افزودن دسته بندی جدید"
+    title="دسته بندی جدید"
+    description="اطلاعات دسته بندی جدید را وارد کنید"
+  >
+    {/* فرم اینجا */}
+  </DialogDemo>
+);
 
-export  const categoryDialog = (
-    <DialogDemo
-      textbutton="افزودن دسته بندی جدید"
-      title="دسته بندی جدید"
-      description="اطلاعات دسته بندی جدید را وارد کنید"
-    >
-      <Field>
-        <Label>نام دسته بندی</Label>
-        <Input name="title" placeholder="مثلاً: الکترونیک" />
-      </Field>
-      <Field>
-        <Label>توضیحات</Label>
-        <Input name="descriptions" placeholder="توضیحات دسته بندی..." />
-      </Field>
-    </DialogDemo>
-  );
+
+

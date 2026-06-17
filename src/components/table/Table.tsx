@@ -1,24 +1,27 @@
-import  { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { TableProps } from "@/types/TableTypes";
 import TableSearch from "./TableSearch";
 import TableHeader from "./TableHeader";
 import TableBody from "./TableBody";
 import TablePagination from "./Pagination";
 import SkeletonLoader from "../shared/Skeleton";
+import { errorToast } from "@/utils/toastUtils";
 
 const Table = ({
-  data,
+  data=[],
   datainfo,
   activityField,
   loading,
   tabletitle,
-  dialog
+  dialog,
 }: TableProps) => {
+  
   const [sortField, setSortField] = useState<string | null>(null);
   const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
+  
 
   const handleSort = (field: string) => {
     if (sortField === field) {
@@ -70,7 +73,7 @@ const Table = ({
         </div>
         <div className="flex items-center gap-5">
           <TableSearch value={search} onChange={setSearch} />
-            {dialog}
+          {dialog}
         </div>
       </div>
 

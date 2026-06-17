@@ -1,12 +1,11 @@
-import Table from "@/components/table/Table";
 import { getCategories } from "@/services/category";
 import { CategoryType } from "@/types/CategoryType";
 import { errorToast } from "@/utils/toastUtils";
 import { useEffect, useState } from "react";
+import CategoriTable from "./CategoryTable";
 
-import {datainfo , activityField , categoryDialog} from './CategoryFeild'
-const CategoriTable = () => {  
-  const [data, setData] = useState<CategoryType>([]);
+const ActionCategory = () => {
+  const [data, setData] = useState<CategoryType[]>([]);
   const [loading, setLoading] = useState(true);
 
   const handelgetcategorylist = async () => {
@@ -14,6 +13,7 @@ const CategoriTable = () => {
       setLoading(true);
       const res = await getCategories();
       if (res.status == 200) {
+        console.log(res)
         setData(res.data.data);
       } else {
         errorToast(res.data.message);
@@ -21,29 +21,25 @@ const CategoriTable = () => {
     } catch (error) {
       errorToast("خطا در دریافت اطلاعات");
     } finally {
-      setLoading(false);  // 👈 finally بهتره تا در همه حالت‌ها اجرا بشه
+      setLoading(false);
     }
   };
+
 
   useEffect(() => {
     handelgetcategorylist();
   }, []);
 
-  
-  
+
 
   
-
   return (
-    <Table
+    <CategoriTable
       data={data}
-      datainfo={datainfo}
-      activityField={activityField}
       loading={loading}
-      tabletitle="دسته بندی ها"
-      dialog={categoryDialog}  
-      />
+      handelgetcategorylist={handelgetcategorylist}
+    />
   );
 };
 
-export default CategoriTable;
+export default ActionCategory;

@@ -4,3 +4,5 @@ export type CategoryType = {
   descriptions: string;
   created_at: string;
 };
+
+
