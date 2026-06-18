@@ -1,9 +1,7 @@
-import React from "react";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/redux/ui_management/reduxHook";
 import { setShowSidebar } from "@/redux/ui_management/uiManagement";
 import { MdOutlineClose } from "react-icons/md";
-import DarkModeButtns from "./DarkModeButtns";
 import SideBarItem from "./SideBarItem";
 import { TbCategory } from "react-icons/tb";
 import { Link } from "react-router-dom";
@@ -16,7 +14,7 @@ const SideBar = () => {
 
   return (
     <>
-      {/* overlay - فقط موبایل، کلیک روش sidebar رو میبنده */}
+      {/* overlay  */}
       {showsidebar && (
         <div
           className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40 md:hidden"
@@ -28,12 +26,12 @@ const SideBar = () => {
       <section
         id="sidebar"
         className={`fixed md:right-0 top-0 h-screen overflow-y-auto z-50
-              dark:text-white text-black md:block border-l backdrop-blur-sm
+              dark:text-white text-black  md:block border-l backdrop-blur-sm
               border-black/30 transition-all duration-300
               ${collapsed ? "md:w-16 w-app_sidebar_w" : "w-app_sidebar_w"}
               ${showsidebar ? "right-0" : "-right-full"}`}
       >
-        {/* هدر sidebar */}
+        {/* sidebar - header */}
         <div className="flex md:justify-center md:-mt-5 md:mx-4 items-center">
           <Link to={"/"} onClick={() => dispatch(setShowSidebar(false))}>
             <img
@@ -44,7 +42,7 @@ const SideBar = () => {
               alt="logo"
             />
           </Link>
-          {/* دکمه بستن - فقط موبایل */}
+          {/* close button in mobile */}
           <button
             className="block md:hidden mt-5 -mr-4 mx-2 transition-all transform hover:scale-110"
             onClick={() => dispatch(setShowSidebar(false))}
@@ -55,7 +53,7 @@ const SideBar = () => {
 
         <hr className="border-black/30 shadow-2xl mt-5 dark:border-white w-9/12 mx-auto" />
 
-        {/* لیست آیتم‌ها */}
+        {/* items list */}
         <div onClick={() => dispatch(setShowSidebar(false))}>
           <ul>
             <SideBarItem to="/categories" Icon={TbCategory} title="دسته‌بندی‌ها" />

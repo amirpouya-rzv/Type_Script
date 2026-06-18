@@ -1,4 +1,4 @@
-import { ErrorMessage, FastField, FieldMetaProps, FieldInputProps } from "formik";
+import { ErrorMessage, Field, FieldMetaProps, FieldInputProps } from "formik";
 import React from "react";
 
 interface InputProps {
@@ -14,7 +14,7 @@ function Input({ name, label, type }: InputProps) {
         {label}
       </label>
 
-      <FastField name={name}>
+      <Field name={name}>
         {({
           field,
           meta,
@@ -34,7 +34,7 @@ function Input({ name, label, type }: InputProps) {
             }`}
           />
         )}
-      </FastField>
+      </Field>
 
       <ErrorMessage
         name={name}

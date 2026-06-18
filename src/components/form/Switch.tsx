@@ -10,7 +10,7 @@ interface SwitchProps {
 function Switch({ name, label }: SwitchProps) {
   return (
     <div className="flex items-center justify-between my-4 gap-5">
-      <label htmlFor={name} className="text-gray-700">
+      <label htmlFor={name} className="text-gray-700 dark:text-white">
         {label}
       </label>
       <FastField name={name}>
@@ -25,7 +25,7 @@ function Switch({ name, label }: SwitchProps) {
             />
             <div
               className="w-full h-full bg-gray-300 peer-focus:ring-2 
-               peer-checked:bg-dark_green dark:peer-checked:bg-dark_red 
+               peer-checked:bg-[#171717] dark:peer-checked:bg-[#004142] 
               rounded-full transition duration-300"
             />
             <div
