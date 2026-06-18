@@ -51,12 +51,16 @@ const SideBar = () => {
           </button>
         </div>
 
-        <hr className="border-black/30 shadow-2xl mt-5 dark:border-white w-9/12 mx-auto" />
+        <hr className="border-black/30 shadow-2xl mt-5  dark:border-white w-9/12 mx-auto" />
 
         {/* items list */}
         <div onClick={() => dispatch(setShowSidebar(false))}>
           <ul>
-            <SideBarItem to="/categories" Icon={TbCategory} title="دسته‌بندی‌ها" />
+            <SideBarItem
+              to="/categories"
+              Icon={TbCategory}
+              title="دسته‌بندی‌ها"
+            />
           </ul>
         </div>
       </section>

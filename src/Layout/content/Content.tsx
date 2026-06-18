@@ -2,6 +2,7 @@ import { useAppSelector } from "@/redux/ui_management/reduxHook";
 import Login from "@/pages/auth/Login";
 import { Route, Routes, useLocation } from "react-router-dom";
 import ActionCategory from "@/pages/categories/ActionCategory";
+import Profile from "@/pages/profile/Profile";
 
 const Content = () => {
   const { collapsed } = useAppSelector((state) => state.uiManagerReducer);
@@ -27,6 +28,7 @@ const Content = () => {
           <div className="w-full p-4">
             <Routes>
               <Route path="/" element={<ActionCategory />} />
+              <Route path="/Profile" element={<Profile/>}/>
             </Routes>
           </div>
         )}

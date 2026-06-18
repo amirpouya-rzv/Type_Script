@@ -18,13 +18,13 @@ const SideBarItem = ({ Icon, title, to }: SidebarItemType) => {
         <NavLink
           to={to}
           className={({ isActive }) =>
-            `items-center rounded-full px-3 py-2 transition-all
+            `items-center rounded-full px-3 py-2 transition-all 
             hover:bg-dark_green/90 hover:text-white
             border-l-2 border-l-dark_green border-r-2 border-r-dark_green
             dark:hover:bg-white/20 dark:border-l-white dark:border-r-white
             flex gap-5 mx-2 mt-5
             ${isActive && "bg-dark_green/80 text-white dark:text-white dark:bg-white/10 backdrop-blur-sm"}
-            ${collapsed ? "justify-center" : ""}`
+            ${collapsed ? "justify-center " : ""}`
           }
         >
           <Icon size={20} />

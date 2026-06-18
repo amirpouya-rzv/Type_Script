@@ -10,14 +10,14 @@ export function TooltipSides({
   title,
   side = "top",
   children,
-  disabled = false, // ✅ اضافه شد
+  disabled = false, 
 }: {
   title: string
   side?: Side
   children: React.ReactNode
   disabled?: boolean
 }) {
-  if (disabled) return <>{children}</> // ✅ اگه disabled بود tooltip نشون نده
+  if (disabled) return <>{children}</> 
 
   return (
     <Tooltip>

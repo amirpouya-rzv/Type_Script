@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import {
   CreditCardIcon,
   LogOutIcon,
   Menu,
-  SettingsIcon,
   UserIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -23,10 +22,9 @@ import {
 } from "@/redux/ui_management/uiManagement";
 import { useAppSelector } from "@/redux/ui_management/reduxHook";
 import { GiAlarmClock } from "react-icons/gi";
-import { useNavigate } from "react-router-dom";
-import { MdOutlineClose, MdOutlineDateRange } from "react-icons/md";
+import { Link, useNavigate } from "react-router-dom";
+import { MdOutlineDateRange } from "react-icons/md";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import DarkModeButtns from "../sidebar/DarkModeButtns";
 import { RiSunLine } from "react-icons/ri";
 import { BsMoon } from "react-icons/bs";
 const Header = () => {
@@ -71,7 +69,7 @@ const Header = () => {
       <span className="flex items-center justify-between">
         <div className="flex items-center justify-between gap-20 -mx-52 md:mx-0 p-4">
 
-          {/* دکمه من در موبایل */}
+          {/* button in mobile */}
           <button
             className="md:hidden md:mt-4 -mx-20"
             onClick={() => dispatch(setShowSidebar(true))}
@@ -79,7 +77,7 @@ const Header = () => {
             <Menu size={24} />
           </button>
 
-          {/* دکمه collapse  */}
+          {/*  collapse  */}
 
           <button
             className={`hidden rounded-full border-2 cursor-pointer border-black/30 dark:bg-black/30 fixed  md:flex items-center justify-center w-8 h-8 bg-white shadow-md transition-all hover:scale-110 ${
@@ -94,7 +92,7 @@ const Header = () => {
             )}
           </button>
 
-          {/* تاریخ و ساعت */}
+          {/* data and hour */}
           <div className="flex gap-1 md:mt-4 mx-5 items-center">
             <span>{converMiladi2Jalali(undefined, "jYYYY/jMM/jD")}</span>
             <MdOutlineDateRange
@@ -113,20 +111,17 @@ const Header = () => {
         <div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button className="mx-5" variant="outline">
-                Open
-              </Button>
+              
+                <img className="w-12 h-12 cursor-pointer mx-5 rounded-full" src="/picture/download.png"/>
+              
             </DropdownMenuTrigger>
             <DropdownMenuContent className=" backdrop-blur-md">
-              <DropdownMenuItem className="gap-2 cursor-pointer">
+                <Link className="flex items-center gap-13" to={'/profile'}>
+              <DropdownMenuItem className="gap-13 cursor-pointer">
+                پروفایل
                 <UserIcon className="h-4 w-4 hover:bg-black" />
-                Profile
               </DropdownMenuItem>
-
-              <DropdownMenuItem className="gap-2 cursor-pointer">
-                <CreditCardIcon className="h-4 w-4" />
-                Billing
-              </DropdownMenuItem>
+                </Link>
 
               <DropdownMenuItem
                 className="flex justify-between gap-2 cursor-pointer"
@@ -135,7 +130,7 @@ const Header = () => {
                 {them === "light" ? (
                   <>
                     حالت تاریک :
-                    <BsMoon size={18} className="text-gray-400" />
+                    <BsMoon size={18} className="text-gray-200" />
                   </>
                 ) : (
                   <>
@@ -148,7 +143,7 @@ const Header = () => {
               <DropdownMenuSeparator />
 
               <DropdownMenuItem
-                className="flex justify-between gap-2 cursor-pointer border-y text-dark_red border-light_red"
+                className="flex justify-between gap-2 cursor-pointer  text-rose-500 "
                 onClick={handleLogout}
               >
                 خروج
