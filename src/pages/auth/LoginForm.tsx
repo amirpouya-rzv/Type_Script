@@ -49,7 +49,7 @@ const LoginForm = () => {
               <button
                 type="button"
                 onClick={toggleVisibility}
-                className="absolute left-3 top-10"
+                className="absolute left-3 top-10 text-black/30"
               >
                 {isVisible ? (
                   <FaRegEye className="mt-1" />
