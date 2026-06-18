@@ -12,7 +12,7 @@ const TableSearch = ({ value, onChange, className }: Props) => {
       value={value}
       onChange={onChange}
       placeholder="جستجو..."
-      className="border-black/30"
+      className="border-black/30 md:w-96"
     />
   );
 };

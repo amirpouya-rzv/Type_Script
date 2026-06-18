@@ -71,7 +71,7 @@ export const activityField = {
 
 export const categoryDialog = (
   <DialogDemo
-    textbutton="افزودن دسته بندی جدید"
+    textbutton="افزودن دسته بندی "
     title="دسته بندی جدید"
     description="اطلاعات دسته بندی جدید را وارد کنید"
   >

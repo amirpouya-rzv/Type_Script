@@ -5,7 +5,6 @@ import TableHeader from "./TableHeader";
 import TableBody from "./TableBody";
 import TablePagination from "./Pagination";
 import SkeletonLoader from "../shared/Skeleton";
-import { errorToast } from "@/utils/toastUtils";
 
 const Table = ({
   data=[],
@@ -68,7 +67,7 @@ const Table = ({
   return (
     <div className="backdrop-blur-sm rounded-2xl border-2 border-black/30 shadow-2xl overflow-hidden">
       <div className="flex items-center justify-between px-5 py-3 border-b">
-        <div className="text-sm fke font-semibold text-black/50 dark:text-white">
+        <div className="text-sm fke font-semibold text-black/50 dark:text-white hidden md:block">
           {tabletitle}
         </div>
         <div className="flex items-center gap-5">
