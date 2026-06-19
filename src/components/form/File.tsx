@@ -1,5 +1,7 @@
-import React, { ChangeEvent } from "react";
-import { ErrorMessage, FastField, FieldProps, FormikProps } from "formik";
+import { ChangeEvent } from "react";
+import { Field, FieldProps, FormikProps } from "formik";
+import { IoIosClose } from "react-icons/io";
+import { FiUploadCloud } from "react-icons/fi";
 
 interface FileProps {
   name: string;
@@ -14,7 +16,7 @@ function FileUpload({ name, label }: FileProps) {
   const handleFileChange = (
     e: ChangeEvent<HTMLInputElement>,
     field: FieldProps["field"],
-    form: FormikProps<FileFormValues>
+    form: FormikProps<FileFormValues>,
   ): void => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -40,49 +42,65 @@ function FileUpload({ name, label }: FileProps) {
   };
 
   return (
-    <div>
-      <label htmlFor={name} className="block text-gray-700 mb-2">
+    <div className="w-full">
+      <label
+        htmlFor={name}
+        className="block text-sm font-medium text-gray-700 mb-1"
+      >
         {label}
       </label>
-      <FastField name={name}>
+      <Field name={name}>
         {({ field, form }: FieldProps<File | null, FileFormValues>) => (
-          <div>
-            <input
-              type="file"
-              id={name}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                handleFileChange(e, field, form)
-              }
-              accept="image/jpeg,image/png"
-            />
-            {form.values[`${name}_preview`] && (
-              <img
-                src={form.values[`${name}_preview`] as string}
-                alt="پیش‌نمایش"
-                className="mt-2 w-24 h-24 object-cover rounded"
-              />
-            )}
-            {form.values[name] && (
-              <button
-                type="button"
-                onClick={() => {
-                  form.setFieldValue(name, null);
-                  form.setFieldValue(`${name}_preview`, null);
-                }}
-                className="text-red-500 text-xs mt-2"
+          <div className="space-y-3">
+            {!form.values[`${name}_preview`] ? (
+              <label
+                htmlFor={name}
+                className="flex flex-col items-center justify-center w-full h-24 border-2 border-dashed border-gray-300 rounded-xl cursor-pointer hover:border-blue-400 hover:bg-blue-50 transition-all"
               >
-                حذف فایل
-              </button>
-            )}
-            {form.errors[name] && form.touched[name] && (
-              <div className="text-red-500 text-xs mt-1">
-                {form.errors[name] as string}
+                <FiUploadCloud className="text-3xl text-gray-400 mb-2" />
+                <span className="text-sm text-gray-500">
+                  برای آپلود کلیک کنید
+                </span>
+                <span className="text-xs text-gray-400 mt-1">
+                  PNG، JPEG — حداکثر ۲ مگابایت
+                </span>
+                <input
+                  type="file"
+                  id={name}
+                  className="hidden"
+                  onChange={(e) => handleFileChange(e, field, form)}
+                  accept="image/jpeg,image/png"
+                />
+              </label>
+            ) : (
+              <div className="relative right-40 w-52 h-28 rounded-xl overflow-hidden border border-gray-200">
+                <img
+                  src={form.values[`${name}_preview`] as string}
+                  alt="پیش‌نمایش"
+                  className="w-full h-full object-cover"
+                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    form.setFieldValue(name, null);
+                    form.setFieldValue(`${name}_preview`, null);
+                  }}
+                  className="absolute top-1 left-1 bg-red-500 hover:bg-red-600 text-white rounded-full p-0.5 transition-all"
+                >
+                  <IoIosClose className="text-sm" />
+                </button>
               </div>
+            )}
+
+            {form.errors[name] && form.touched[name] && (
+              <p className="text-red-500 text-xs">
+                {form.errors[name] as string}
+              </p>
             )}
           </div>
         )}
-      </FastField>
-      <ErrorMessage name={name} />
+      </Field>{" "}
+      {/* ← FastField نه! */}
     </div>
   );
 }

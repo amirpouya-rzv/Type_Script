@@ -60,6 +60,7 @@ const SideBar = () => {
               to="/categories"
               Icon={TbCategory}
               title="دسته‌بندی‌ها"
+              
             />
           </ul>
         </div>

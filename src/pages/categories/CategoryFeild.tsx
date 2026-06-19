@@ -3,8 +3,8 @@ import { GrEdit } from "react-icons/gr";
 import { BiDetail } from "react-icons/bi";
 import { FaSitemap } from "react-icons/fa6";
 import { TooltipSides } from "@/components/shared/Toolip";
-import { DialogDemo } from "@/components/shared/Diloag";
 import { converMiladi2Jalali } from "@/utils/dateutils";
+
 
 export const datainfo = [
   { field: "id", title: "#" },
@@ -69,15 +69,7 @@ export const activityField = {
   },
 };
 
-export const categoryDialog = (
-  <DialogDemo
-    textbutton="افزودن دسته بندی "
-    title="دسته بندی جدید"
-    description="اطلاعات دسته بندی جدید را وارد کنید"
-  >
-    {/* فرم اینجا */}
-  </DialogDemo>
-);
+
 
 
 

@@ -5,4 +5,11 @@ export type CategoryType = {
   created_at: string;
 };
 
-
+export type SendCategoryType = {
+  title: string;
+  descriptions: string;
+  parent_id: string;
+  is_active: boolean;
+  show_in_menu: boolean;
+  image?: File | null;
+};

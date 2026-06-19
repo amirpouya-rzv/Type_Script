@@ -1,14 +1,16 @@
 import Table from "@/components/table/Table";
 import { CategoryType } from "@/types/CategoryType";
-import { activityField, categoryDialog, datainfo } from "./CategoryFeild";
+import { activityField, datainfo } from "./CategoryFeild"; // ← categoryDialog حذف شد
+import { ReactNode } from "react";
 
 type ActionType = {
   data: CategoryType[];
   loading: boolean;
   handelgetcategorylist: () => void;
+  categoryDialog: ReactNode; // ← اضافه شد
 };
 
-const CategoriTable = ({ data, loading }: ActionType) => {
+const CategoriTable = ({ data, loading, categoryDialog }: ActionType) => {
   return (
     <Table
       data={data}
